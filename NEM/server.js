@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const _DataBase = require('./configuration/DatabaseConnection');
 // const Database;
 //Block End Dependencies
 
@@ -21,7 +22,7 @@ const Port = process.env.Port || 3636;
 //Start Block Setting th Headers for your Application
 app.all('*', (req, res, next) => {
     // This is how we protect the api
-    res.header('Access-Control-Allow-Origin', '*');// So it make the header allow to the origin when cross platfrom try to exchange the data
+    res.header('Access-Control-Allow-Origin', 'https://www.google.com/');// So it make the header allow to the origin when cross platfrom try to exchange the data
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     if (req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'PUT,POST,PATCH,DELETE,GET');
@@ -34,6 +35,7 @@ app.all('*', (req, res, next) => {
 
 //Start Block Setting Static Folder
 app.use('/assets', express.static('assets'));
+app.use(express.static(path.join(__dirname,'/frontend-lms')));
 //End Block Setting Static Folder
 
 
@@ -50,9 +52,10 @@ app.use('/QuestionaireManagement',_QuestionaireManagementRoute);
 
 
 //Serving Front End Form Your Server.js(Express)
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + ''));
-})
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname+'/frontend-lms/index.html'));
+});
+
 //Serving Front End Form Your Server.js(Express)
 
 

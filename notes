@@ -1,0 +1,7 @@
+A database : Structured way of storing data
+non sql: 
+Database store in document 
+
+{
+<field>:<value>
+}
