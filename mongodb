@@ -1,0 +1,43 @@
+=> MongoDb is document based and non relational database:
+Table = collection
+row = document
+
+How does a schemaless database work?
+In schemaless databases, information is stored in JSON-style documents which can have varying sets of fields with different data types for each field. So, a collection could look like this:
+
+   { 
+        name : “Joe”, age : 30, interests : ‘football’ }
+    { 
+        name : “Kate”, age : 25 
+        }
+        
+What are the benefits of using a schemaless database?
+
+
+Greater flexibility over data types:
+
+By operating without a schema, schemaless databases can store, retrieve, and query any data type — perfect for big data analytics and similar operations that are powered by unstructured data. Relational databases apply rigid schema rules to data, limiting what can be stored.
+
+No pre-defined database schemas:
+
+The lack of schema means that your NoSQL database can accept any data type — including those that you do not yet use. This future-proofs your database, allowing it to grow and change as your data-driven operations change and mature.
+
+No data truncation:
+
+A schemaless database makes almost no changes to your data; each item is saved in its own document with a partial schema, leaving the raw information untouched. This means that every detail is always available and nothing is stripped to match the current schema. This is particularly valuable if your analytics needs to change at some point in the future.
+
+Suitable for real-time analytics functions:
+
+With the ability to process unstructured data, applications built on NoSQL databases are better able to process real-time data, such as readings and measurements from IoT sensors. Schemaless databases are also ideal for use with machine learning and artificial intelligence operations, helping to accelerate automated actions in your business.
+
+Enhanced scalability and flexibility:
+
+With NoSQL, you can use whichever data model is best suited to the job. Graph databases allow you to view relationships between data points, or you can use traditional wide table views with an exceptionally large number of columns. You can query, report, and model information however you choose. And as your requirements grow, you can keep adding nodes to increase capacity and power.
+
+When a record is saved to a relational database, anything (particularly metadata) that does not match the schema is truncated or removed. Deleted at write, these details cannot be recovered at a later point in time.
+
+What does this look like?
+
+A lack of rigid schema allows for increased transparency and automation when making changes to the database or performing a data migration. Say you want to add GPA attributes to student objects held in your database. You simply add the attribute, resave, and the GPA value has been added to the NoSQL document. If you look up an existing student and reference GPA, it will return null. If you roll back your code, the new GPA fields in the existing objects are unlikely to cause problems and do not need to be removed if your code is well written.
+
+
