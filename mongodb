@@ -41,3 +41,85 @@ What does this look like?
 A lack of rigid schema allows for increased transparency and automation when making changes to the database or performing a data migration. Say you want to add GPA attributes to student objects held in your database. You simply add the attribute, resave, and the GPA value has been added to the NoSQL document. If you look up an existing student and reference GPA, it will return null. If you roll back your code, the new GPA fields in the existing objects are unlikely to cause problems and do not need to be removed if your code is well written.
 
 
+
+
+
+Commands:
+
+1 show dbs ----> to show all database
+2 db.createCollection()
+2 db.abc.insert(    to insert data
+3 db.getCollection('abc').find({})
+4 db.abc.insertMany([])
+5 db.getCollection('abc').find({Name:"D"})
+6 db.getCollection('abc').find({
+    "_id":ObjectId("6225cce8181ff7f193fe88ff")
+    })
+    
+7 How to find one doc 
+db.getCollection('abc').findOne({
+    "_id":ObjectId("6225cce8181ff7f193fe88ff")
+    })
+    
+
+8 How To FInd using and Operator 
+db.getCollection('abc').find(
+{
+    "$and":[
+    {Name:"D"},
+    {Age:25}
+]
+    }
+)
+
+
+9 How To FInd using or Operator 
+db.getCollection('abc').find(
+{
+    "$or":[
+    {Name:"D"},
+    {Age:25}
+]
+    }
+)
+
+10 How To Update 
+db.getCollection('abc').update(
+{Age: {$eq:22}},
+{$set:{Name:"Hi There How are You"}}
+) 
+
+11 How To Update/ UpdateOne
+db.getCollection('abc').updateOne(
+{Age: {$eq:24}},
+{$set:{Name:"Hi There How are You"}}
+)
+
+
+12 How to Update Multiple
+db.getCollection('abc').updateMany(
+{Age: {$eq:24}},
+{$set:{Name:"Hi There How are You"}}
+)
+
+13 How To remove all
+
+db.getCollection('abc').remove(
+{Age: {$eq:24}}
+)
+
+
+14 How to remove one
+
+db.getCollection('abc').find({Age:{$eq:25}})
+
+
+Comparison operators:
+$eq,  db.getCollection('abc').find({Age: {$eq:24}} )
+$gt, db.getCollection('abc').find({Age: {$gt:24}} )
+$gte, db.getCollection('abc').find({Age: {$gte:24}} )
+$in, db.getCollection('abc').find({Age: {$in:[22,23]}} ) array main jo hoon
+$lt, db.getCollection('abc').find({Age: {$lt:24}} )
+$lte, db.getCollection('abc').find({Age: {$lte:24}} )
+$ne, db.getCollection('abc').find({Age: {$ne:24}} )
+$nin db.getCollection('abc').find({Age: {$nin:[22,23]}} )   array main jo nahi hai
