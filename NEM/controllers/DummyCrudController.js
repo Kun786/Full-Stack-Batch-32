@@ -1,8 +1,6 @@
 const fs = require('fs');
 const _TestModel = require('../models/testmodel');
 const _QuestionModel = require('../models/MCQsmodel');
-const { hasSubscribers } = require('diagnostics_channel');
-const { updateMany, updateOne } = require('../models/testmodel');
 
 const PostApi = (req, res) => {
     try {
@@ -150,11 +148,17 @@ const MakeQuestionnaire = async(req, res) => {
                 Price:Price,
                 Questions:Questions
             });
-            const _SavedData =  await _DataToSave.save();
+            const RunMultipleQueries = await Promise.all(
+                 _DataToSave.save(),
+                _TestModel.updateOne(
+                    {Name:'test'},
+                    {ReferenceIdForMcqs:_SavedData._id}
+                )
+            )
             res.json({
                 Message:'Data Found Successfuly',
                 Data:true,
-                Result:_SavedData
+                Result:RunMultipleQueries
             })
         }
         
