@@ -5,7 +5,7 @@ const TestSchema = mongoose.Schema({
     Email:{type:String,unique:true},
     Age:{type:Number,required:true,integer: true},
     City:{type:String},
-    ReferenceIdForMcqs:{type:mongoose.Types.ObjectId, ref:'QuestionsCollection'}
+    ReferenceIdForMcqs:[{type:mongoose.Types.ObjectId, ref:'QuestionsCollection'}]
 })
 
 

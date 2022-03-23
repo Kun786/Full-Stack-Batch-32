@@ -122,7 +122,7 @@ const MakeQuestionnaire = async(req, res) => {
     try {
         const { ExamPlan, Price, Questions } = req.body;
         const _GetLengthofQuestionnaireCollection = await _QuestionModel.find().lean();
-        if(_GetLengthofQuestionnaireCollection.length >=4){
+        if(_GetLengthofQuestionnaireCollection.length >=6){
             return res.json({
                 Message:'You cannot add more than 3 Questionnaire'
             })
@@ -148,13 +148,15 @@ const MakeQuestionnaire = async(req, res) => {
                 Price:Price,
                 Questions:Questions
             });
-            const RunMultipleQueries = await Promise.all(
-                 _DataToSave.save(),
-                _TestModel.updateOne(
+
+            const RunMultipleQueries = Promise.all(
+                _SavedData =  await _DataToSave.save(),
+                _UpdateTestCollection = await _TestModel.updateOne(
                     {Name:'test'},
                     {ReferenceIdForMcqs:_SavedData._id}
                 )
             )
+
             res.json({
                 Message:'Data Found Successfuly',
                 Data:true,
@@ -172,4 +174,25 @@ const MakeQuestionnaire = async(req, res) => {
     }
 }
 
-module.exports = { PostApi, UserLogin, GetData, ReadFile, PostTestData, MakeQuestionnaire }
+const GetPopulate = async (req, res) => {
+    try {
+        const data = await _TestModel.findOne(
+            {Name:'test'},
+        ).populate(
+            {path:'ReferenceIdForMcqs'}
+        )
+        console.log(data);
+        res.json({
+            message:'yes',
+            Data:data
+        })
+    } catch (error) {
+        res.json({
+            Message:error.message,
+            Data:false,
+            Result:null
+        })
+    }
+}
+
+module.exports = { PostApi, UserLogin, GetData, ReadFile, PostTestData, MakeQuestionnaire, GetPopulate }

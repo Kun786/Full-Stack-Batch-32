@@ -12,7 +12,8 @@ const {
     GetData,
     ReadFile,
     PostTestData,
-    MakeQuestionnaire
+    MakeQuestionnaire,
+    GetPopulate
 } = require('../controllers/DummyCrudController');
 
 Router.post('/TestController',TestController);
@@ -22,5 +23,6 @@ Router.get('/GetData',GetData);
 Router.get('/ReadFile',ReadFile);
 Router.post('/PostTestData',PostTestData);
 Router.post('/MakeQuestionnaire',MakeQuestionnaire);
+Router.get('/GetPopulate',GetPopulate);
 
 module.exports = Router;
