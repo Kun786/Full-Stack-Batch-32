@@ -153,11 +153,18 @@ const AddUser = async(req, res) => {
         const DocumentId =  req.params._DocumentId;
         const SubDocumentId = req.params._SubDocumentId;
         const {NewName}=req.body;
+        console.log(NewName);
         const SubDocumentToUpdate = await _UserModel.updateOne(
-           {_id:DocumentId},
-           {FatherDetails:{_id:SubDocumentId}},
-           {$set:{FatherName:NewName}}
+           {_id:DocumentId,
+            'FatherDetails._id':SubDocumentId},
+           {$set:{'FatherDetails.FatherName':NewName}}
         );
+
+        // const SubDocumentToUpdate = await _UserModel.updateOne(
+        //     {_id:DocumentId,
+        //      "FatherDetails._id":SubDocumentId},
+        //     {$unset:{"FatherDetails.$.FatherName":NewName}}
+        //  );
         res.json({
            Message:'Reached AddNewFather Controller',
            Data:true,
