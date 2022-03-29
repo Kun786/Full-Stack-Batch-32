@@ -131,6 +131,7 @@ const AddUser = async(req, res) => {
      try {
          const DocumentId =  req.params._DocumentId;
          const SubDocumentId = req.params._SubDocumentId;
+         console.log(SubDocumentId);
          const SubDocumentToDelete = await _UserModel.updateOne(
             {_id:DocumentId},
             {$pull:{FatherDetails:{_id:SubDocumentId}}}
@@ -152,6 +153,7 @@ const AddUser = async(req, res) => {
     try {
         const DocumentId =  req.params._DocumentId;
         const SubDocumentId = req.params._SubDocumentId;
+        console.log(SubDocumentId);
         const {NewName}=req.body;
         console.log(NewName);
         const SubDocumentToUpdate = await _UserModel.updateOne(

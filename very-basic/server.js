@@ -12,6 +12,7 @@ app.use(cors());
 
 //Call Routes
 const _UserManagementRoute = require('./routes/UserManagementRoute');
+const _UserAuthenticationRoute = require('./routes/UserAuthenticationRoute');
 
 app.use('/UserManagement',_UserManagementRoute);
 //Initialize Routes
