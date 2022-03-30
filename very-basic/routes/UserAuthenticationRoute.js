@@ -5,7 +5,7 @@ const Router = express.Router();
 const {
     UserLogin,
     UserRegister
-} = require('../controllers/UserManagementController');
+} = require('../controllers/UserAutheticationController');
 
 Router.post('/UserLogin',UserLogin);
 Router.post('/UserRegister',UserRegister);
