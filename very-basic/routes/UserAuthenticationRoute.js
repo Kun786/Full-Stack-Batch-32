@@ -4,7 +4,8 @@ const Router = express.Router();
 //Calling Controller
 const {
     UserLogin,
-    UserRegister
+    UserRegister,
+    GetUser
 } = require('../controllers/UserAutheticationController');
 
 //Calling Middlewares
@@ -14,7 +15,7 @@ const { UploadAdminImage } = require('../libraryfiles/UploadMedia');
 const { 
     ForgetPasswordRequest, 
     ForgetPasswordResponse, 
-    ValidateUserForTokken 
+    ValidateUserForTokken,
 } = require('../controllers/PasswordManagementController');
 
 Router.post('/UserLogin',AuthorizedGuard,UserLogin);
@@ -22,5 +23,6 @@ Router.post('/UserRegister',UploadAdminImage.single('Image'),UserRegister);
 Router.post('/ForgotPasswordMechanism',ForgetPasswordRequest);
 Router.post('/ForgetPasswordResponse/:_UserId/:_Token',ForgetPasswordResponse);
 Router.post('/ValidatePasswordToken',ValidateUserForTokken);
+Router.get('/GetUser',GetUser);
 
 module.exports = Router;

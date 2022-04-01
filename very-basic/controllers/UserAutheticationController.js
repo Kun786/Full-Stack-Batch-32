@@ -67,7 +67,7 @@ const UserRegister = async (req, res) => {
             Email: Email,
             Password: Password,
             CourseName: CourseToSave,
-            ImageUrl: path,
+            ImageUrl: `http://localhost:7612/${path}`,
             ImageName: filename,
             ImageMimeType: mimetype,
         });
@@ -84,13 +84,31 @@ const UserRegister = async (req, res) => {
 }
 
 
-
-
+const GetUser = async (req, res) => {
+    try {
+        const DocToSave = await _UserUthenticationCluster.findOne()
+        res.json({
+            Message:'Data Found Successfuly',
+            Data:true,
+            Result:DocToSave
+        })
+    } catch (error) {
+        res.json({ Message: error.message, Result: null, Data: false });
+    }
+}
 
 
 
 
 module.exports = {
     UserLogin,
-    UserRegister
+    UserRegister,
+    GetUser
 }
+
+
+
+
+
+// let Data  = fetch('http://localhost:7612/UserAuthentication/GetUser');
+// <img src="Data.ImageUrl"></img>
