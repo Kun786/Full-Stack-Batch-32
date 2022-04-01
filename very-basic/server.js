@@ -15,6 +15,7 @@ const _UserManagementRoute = require('./routes/UserManagementRoute');
 const _UserAuthenticationRoute = require('./routes/UserAuthenticationRoute');
 
 app.use('/UserManagement',_UserManagementRoute);
+app.use('/UserAuthentication',_UserAuthenticationRoute);
 //Initialize Routes
 
 app.listen(PORT,() => {
