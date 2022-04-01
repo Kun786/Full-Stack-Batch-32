@@ -9,6 +9,8 @@ const {
 
 //Calling Middlewares
 const { AuthorizedGuard } = require('../libraryfiles/Fucntion');
+const { UploadAdminImage } = require('../libraryfiles/UploadMedia');
+
 const { 
     ForgetPasswordRequest, 
     ForgetPasswordResponse, 
@@ -16,7 +18,7 @@ const {
 } = require('../controllers/PasswordManagementController');
 
 Router.post('/UserLogin',AuthorizedGuard,UserLogin);
-Router.post('/UserRegister',UserRegister);
+Router.post('/UserRegister',UploadAdminImage.single('Image'),UserRegister);
 Router.post('/ForgotPasswordMechanism',ForgetPasswordRequest);
 Router.post('/ForgetPasswordResponse/:_UserId/:_Token',ForgetPasswordResponse);
 Router.post('/ValidatePasswordToken',ValidateUserForTokken);

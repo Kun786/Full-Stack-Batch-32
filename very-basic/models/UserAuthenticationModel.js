@@ -19,6 +19,9 @@ const UserRegisterSchema = mongoose.Schema({
         }
     ],
     SaltString: { type: String },
+    ImageUrl: { type: String },
+    ImageName: { type: String },
+    ImageMimeType: { type: String },
     Status: { type: Number, default: 0 },
     CreatedDate: {
         type: String,

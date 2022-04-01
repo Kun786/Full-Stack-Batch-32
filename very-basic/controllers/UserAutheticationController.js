@@ -8,7 +8,7 @@ const UserLogin = async (req, res) => {
         let _UserToAuthenticate = await _UserUthenticationCluster.findOne(
             { Email: Email },
             // {Email:1, Name:1, Password:1} 
-            ).lean();
+        ).lean();
         if (_UserToAuthenticate === null) {
             return res.json({
                 Message: 'Authentication Failed Either Incorrect Password or Email',
@@ -60,6 +60,7 @@ const UserLogin = async (req, res) => {
 const UserRegister = async (req, res) => {
     try {
         const { Name, Email, Password, CourseName } = req.body;
+        const  { filename, mimetype, path} = req.file;
         const QuestionnaireToFind = await _QuestionnaireCluster.findOne({ ExamPlan: CourseName });
         const QuestionnaireId = QuestionnaireToFind._id;
         const CourseToSave = { CName: CourseName, CDetails: QuestionnaireId };
@@ -67,7 +68,10 @@ const UserRegister = async (req, res) => {
             Name: Name,
             Email: Email,
             Password: Password,
-            CourseName: CourseToSave
+            CourseName: CourseToSave,
+            ImageUrl: path,
+            ImageName: filename,
+            ImageMimeType: mimetype,
         });
         const SavedUser = await _RegisterAdmin.save();
 
@@ -77,7 +81,7 @@ const UserRegister = async (req, res) => {
             UserEmail: SavedUser.Email,
             Questions: QuestionnaireToFind.Questions,
             TotalQuestions: QuestionnaireToFind.Questions.length,
-            ExamPlan:SavedUser.CourseName[0].CName
+            ExamPlan: SavedUser.CourseName[0].CName
         })
         await UserQuestionnaireContainerToSave.save();
         res.json({
