@@ -61,9 +61,7 @@ const UserRegister = async (req, res) => {
     try {
         const { Name, Email, Password, CourseName } = req.body;
         const  { filename, mimetype, path} = req.file;
-        const QuestionnaireToFind = await _QuestionnaireCluster.findOne({ ExamPlan: CourseName });
-        const QuestionnaireId = QuestionnaireToFind._id;
-        const CourseToSave = { CName: CourseName, CDetails: QuestionnaireId };
+        const CourseToSave = { CName: CourseName };
         const _RegisterAdmin = new _UserUthenticationCluster({
             Name: Name,
             Email: Email,
@@ -75,20 +73,10 @@ const UserRegister = async (req, res) => {
         });
         const SavedUser = await _RegisterAdmin.save();
 
-        const UserQuestionnaireContainerToSave = new _UserUthenticationCluster({
-            UserId: SavedUser._id,
-            UserName: SavedUser.Name,
-            UserEmail: SavedUser.Email,
-            Questions: QuestionnaireToFind.Questions,
-            TotalQuestions: QuestionnaireToFind.Questions.length,
-            ExamPlan: SavedUser.CourseName[0].CName
-        })
-        await UserQuestionnaireContainerToSave.save();
         res.json({
             Message: `User Register Successfully`,
             Data: true,
-            Result: _RegisterAdmin,
-            UserLogin: UserLogin
+            Result: SavedUser,
         })
     } catch (error) {
         res.json({ Message: error.message, Result: null, Data: false });
