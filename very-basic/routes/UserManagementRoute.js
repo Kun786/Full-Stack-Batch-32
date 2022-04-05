@@ -14,8 +14,12 @@ const {
      UpdateSubDocumentParticularKey
 } = require('../controllers/UserManagementController');
 
+//Library Files Initializition
+const { GuradRoute } = require('../libraryfiles/Guard') 
+
+
 //Call Routes
-Router.post('/AddUser',AddUser);
+Router.post('/AddUser',GuradRoute,AddUser);
 Router.get('/GetUser',GetUser);
 Router.post('/UpdateUserById/:_UserId',UpdateUserById);
 Router.post('/DeleteUser',DeleteUser);

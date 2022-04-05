@@ -4,7 +4,6 @@ const SecretKey = 'UserLogin';
 let AuthorizeUser = (req, res, next) => {
     try {
         const Token = req.headers.token.split(" ")[1];
-        console.log(Token);
         const UserToAuthenticate = jwt.verify(Token, SecretKey);
         if (UserToAuthenticate) {
             next();
