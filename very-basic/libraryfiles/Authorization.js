@@ -1,16 +1,26 @@
-const jwt = requite('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const SecretKey = 'UserLogin';
 
 let AuthorizeUser = (req, res, next) => {
     try {
-        const Token = req.body.token.split(" ")[1];
-        const UserToAuthenticate = jwt.verify(Token,SecretKey);
-        next();
+        const Token = req.headers.Token.split(" ")[1];
+        const UserToAuthenticate = jwt.verify(Token, SecretKey);
+        if (UserToAuthenticate) {
+            next();
+        } else {
+            return res.json({
+                Message: 'Authentication Failed',
+                Data: false,
+                Result: null
+            })
+        }
     } catch (error) {
         res.json({
-            Message:error.message,
-            Data:false,
-            Result:null
+            Message: error.message,
+            Data: false,
+            Result: null
         })
     }
 }
+
+module.exports = { AuthorizeUser }
