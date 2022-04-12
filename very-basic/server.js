@@ -14,9 +14,11 @@ app.use('/assets',express.static('assets'));
 //Call Routes
 const _UserManagementRoute = require('./routes/UserManagementRoute');
 const _UserAuthenticationRoute = require('./routes/UserAuthenticationRoute');
+const _ProductManagementRoute = require('./routes/ProductManagement');
 
 app.use('/UserManagement',_UserManagementRoute);
 app.use('/UserAuthentication',_UserAuthenticationRoute);
+app.use('/Product',_ProductManagementRoute);
 //Initialize Routes
 
 app.listen(PORT,() => {

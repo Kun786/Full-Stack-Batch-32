@@ -11,7 +11,8 @@ const {
      DeleteUserById,
      AddNewFather,
      DeleteSubDocument,
-     UpdateSubDocumentParticularKey
+     UpdateSubDocumentParticularKey,
+     GetUserWithProductDetails
 } = require('../controllers/UserManagementController');
 
 //Library Files Initializition
@@ -19,8 +20,9 @@ const { GuradRoute } = require('../libraryfiles/Guard')
 
 
 //Call Routes
-Router.post('/AddUser',GuradRoute,AddUser);
+Router.post('/AddUser',AddUser);
 Router.get('/GetUser',GetUser);
+Router.post('/GetUserWithProductDetails',GetUserWithProductDetails);
 Router.post('/UpdateUserById/:_UserId',UpdateUserById);
 Router.post('/DeleteUser',DeleteUser);
 Router.delete('/DeleteUserById/:_UserId',DeleteUserById);

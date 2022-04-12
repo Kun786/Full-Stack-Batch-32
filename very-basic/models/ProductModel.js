@@ -7,14 +7,14 @@ const year = today.getFullYear();
 const time = today.getTime();
 
 
-const UserModel = mongoose.Schema({
-    Name:{type:String},
-    Age:{type:Number},
-    ProductId:{ type: mongoose.Schema.Types.ObjectId, ref: 'ProductCluster' },
+const ProductModel = mongoose.Schema({
+    ProductName:{type:String},
+    ProductAge:{type:Number},
+    ProductCompany:{type:String},
     CreatedDate: {
         type: String,
         default: `${year}-${month}-${day}-${time}`,
     }
 },{timestamps:true});
 
-module.exports =  mongoose.model('UserCluster',UserModel);
+module.exports =  mongoose.model('ProductCluster',ProductModel);

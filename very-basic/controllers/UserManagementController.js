@@ -1,15 +1,23 @@
 const { remove, updateOne } = require('../models/UserManagementModel');
 const _UserModel = require('../models/UserManagementModel');
+const _ProductModel = require('../models/ProductModel');
 
 const AddUser = async(req, res) => {
      try {
-            const {Name, Age, FatherDetails} = req.body;
+            const { Name, Age, ProductName } = req.body;
+            const GetProduct = await _ProductModel.findOne(
+                {ProductName:ProductName}
+            )
+                console.log(GetProduct);
             const DataToSave = new _UserModel({
                 Name:Name,
                 Age:Age,
-                FatherDetails:FatherDetails
+                ProductId:GetProduct._id
             });
             const SavedData = await DataToSave.save();
+
+            //Update Karo user ke Model Ke Product Id 
+            const UserToUpdate = await 
          res.json({
              Message:'User Saved',
              Data:true,
@@ -180,6 +188,24 @@ const AddUser = async(req, res) => {
     }
 }
 
+let GetUserWithProductDetails = async(req, res) => {
+    try {
+        const {Name}=req.body;
+        const GetUserByName = await _UserModel.findOne(
+            {Name:Name}
+        ).populate('ProductId');
+        res.json({
+            Message:'Find Successfuly',
+            Result:GetUserByName,
+            Data:true
+        })
+    } catch (error) {
+        res.json({
+            Message:error.message
+        })
+    }
+}
+
  module.exports = {
      AddUser,
      GetUser,
@@ -189,5 +215,6 @@ const AddUser = async(req, res) => {
      DeleteUserById,
      AddNewFather,
      DeleteSubDocument,
-     UpdateSubDocumentParticularKey
+     UpdateSubDocumentParticularKey,
+     GetUserWithProductDetails
  }
