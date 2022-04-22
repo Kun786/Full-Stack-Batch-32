@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const PORT = 7612;
-const Database = require('./config/DataBaseConfiguration');
+const PORT = process.env.PORT || 7612;
+// const Database = require('./config/DataBaseConfiguration');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,4 +23,5 @@ app.use('/Product',_ProductManagementRoute);
 
 app.listen(PORT,() => {
     console.log(`app is running ${PORT}`);
+    console.log(process.env);
 })

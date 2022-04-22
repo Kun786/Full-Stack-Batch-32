@@ -2,7 +2,7 @@ const Package = require('../package.json');
 const mongoose = require('mongoose');
 
 const DatabaseName = 'Class DataBase';
-mongoose.connect("mongodb+srv://USMAN:USMAN@usman.1ag8f.mongodb.net/USMAN?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, (error,connection) => {
+mongoose.connect(process.env.MONGOURI, { useNewUrlParser: true, useUnifiedTopology: true }, (error,connection) => {
     if (!error) {
         console.log(`\nMogoDb Connected Successfuly at MongoAtlas with Database Name ${DatabaseName}\n`);
         console.log("Your App Has the Following Dependicies\n");
@@ -12,3 +12,5 @@ mongoose.connect("mongodb+srv://USMAN:USMAN@usman.1ag8f.mongodb.net/USMAN?retryW
     }
     else { console.log('Error: Not Connected to the MongoDb' + error) }
 });
+
+// mongodb+srv://USMAN:USMAN@usman.1ag8f.mongodb.net/USMAN?retryWrites=true&w=majority
